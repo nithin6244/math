@@ -1,0 +1,40 @@
+from sympy import *
+from sympy.abc import x,y
+p = 3*x**2 - 8*y**2
+q = 2*y*(2 - 3*x)
+print("Normal integration:")
+I1 = integrate(p.subs(y, 0), (x, 0, 1))
+I2 = integrate(q.subs(x, 1), (y, 0, 2))
+I3 = integrate(p.subs(y, 2), (x, 1, 0))
+I4 = integrate(q.subs(x, 0), (y, 2, 0))
+I = I1 + I2 + I3 + I4
+print(I)
+
+print("By green's theorem:")
+GI1 = integrate(diff(q, x) - diff(p, y), (x, 0, 1), (y, 0, 2))
+print(GI1)
+
+if(I == GI1):
+    print("verified")
+else:
+    print("not verified")
+    
+    # QUESTION TYPE 2 (Q2):
+from sympy import *
+from sympy.abc import x,y
+p = 3*x**2 - 8*y**2
+q = 4*y - 6*x*y
+print("Normal integration:")
+I1 = integrate(p.subs(y, x**2) + q.subs(y, x**2)*2*x, (x, 0, 1))
+I2 = integrate(p.subs(x, y**2)*2*y + q.subs(x, y**2), (y, 1, 0))
+I = I1 + I2
+print(simplify(I))
+
+print("By green's theorem:")
+GI1 = integrate(diff(q, x) - diff(p, y), (x, y**2, sqrt(y)), (y, 0, 1))
+print(GI1)
+
+if(I == GI1):
+    print("verified")
+else:
+    print("not verified")
