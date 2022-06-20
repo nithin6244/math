@@ -1,0 +1,13 @@
+from sympy import *
+s,t=symbols('s,t',positive=True)
+L= Function("L")
+y_0,y_1=2,1
+y2=s**2*L(t)-s*y_0-y_1
+y1=s*L(t)-y_0
+y=L(t)
+LHS=y2+y1-2*y
+RHS=4
+a=Eq(LHS,laplace_transform(RHS,t,s)[0])
+sol=solve(a,L(t))[0]
+soln=inverse_laplace_transform(sol,s,t)
+print("Soln is:",soln)
